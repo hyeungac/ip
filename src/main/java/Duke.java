@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        String[] list = new String[100];
+        int task_count = 0;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -23,9 +25,23 @@ public class Duke {
                         "____________________________________________________________\n");
                 break;
             }
+            else if(line.equalsIgnoreCase("list")){
+                int index = 0;
+                System.out.println("____________________________________________________________");
+                for (String task : list) {
+                    if (index == task_count) {
+                        break;
+                    }
+
+                    System.out.println(index + ": " + task);
+                    index++;
+                }
+                System.out.println("____________________________________________________________");
+            }
             else{
+                list[task_count++] = line;
                 System.out.println("____________________________________________________________\n" +
-                        line + "\n"+
+                        "added: "+line + "\n"+
                         "____________________________________________________________\n");
             }
         }

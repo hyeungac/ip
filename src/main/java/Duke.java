@@ -62,10 +62,29 @@ public class Duke {
 
             }
             else{
-                list[task_count++] = new Task(line);
+                if(line.contains("todo")){
+                    int firstspace = line.indexOf(" ");
+                    String TaskName = line.substring(firstspace + 1);
+                    list[task_count++] = new Todo(TaskName);
+                }
+                else if(line.contains("deadline")){
+                    String[] parts = line.split("/");
+                    int firstspace = parts[0].indexOf(" ");
+                    String TaskName = parts[0].substring(firstspace + 1);
+                    list[task_count++] = new Deadline(TaskName, parts[1]);
+                }
+                else if (line.contains("event")){
+                    String[] parts = line.split("/");
+                    int firstspace = parts[0].indexOf(" ");
+                    String TaskName = parts[0].substring(firstspace + 1);
+                    list[task_count++] = new Event(TaskName, parts[1], parts[2]);
+                }
                 System.out.println("____________________________________________________________\n" +
-                        "added: "+line + "\n"+
+                        "well! ive added: ");
+                list[task_count-1].printinfo();
+                System.out.println("\n"+
                         "____________________________________________________________\n");
+
             }
         }
 

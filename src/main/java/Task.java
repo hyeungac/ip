@@ -25,6 +25,6 @@ public class Task {
         else{
             System.out.print(" ");
         }
-        System.out.println("] " + this.name);
+        System.out.print("] " + this.name);
     }
 }

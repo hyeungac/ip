@@ -5,7 +5,7 @@ public class Todo extends Task{
 
     @Override
     public void printinfo() {
-        System.out.print("[T] ");
+        System.out.print("[T]");
         super.printinfo();
         System.out.println();
     }

@@ -24,8 +24,7 @@ public class Duke {
                         " Bye. Hope to see you again soon!\n" +
                         "____________________________________________________________\n");
                 break;
-            }
-            else if(line.equalsIgnoreCase("list")){
+            } else if(line.equalsIgnoreCase("list")){
                 int index = 0;
                 System.out.println("____________________________________________________________");
                 for (Task task : list) {
@@ -38,46 +37,116 @@ public class Duke {
                     index++;
                 }
                 System.out.println("____________________________________________________________");
-            }
-            else if(line.contains("unmark")){
-                String index = line.substring(line.indexOf(" ")+1);
-                int ind =  Integer.parseInt(index);
-                ind--;
-                list[ind].setDone(false);
-                System.out.println("____________________________________________________________");
-                System.out.println("OK, I've marked this task as not done yet:");
-                list[ind].printinfo();
-                System.out.println("____________________________________________________________");
+            } else if(line.contains("unmark")){
+                try{
+                    String index = line.substring(line.indexOf(" ")+1);
+                    int ind =  Integer.parseInt(index);
+                    ind--;
+                    list[ind].setDone(false);
+                    System.out.println("____________________________________________________________");
+                    System.out.println("OK, I've marked this task as not done yet:");
+                    list[ind].printinfo();
+                    System.out.println("____________________________________________________________");
+                } catch(NumberFormatException e){
+                    System.out.println("______________________________________________________________");
+                    System.out.println("emmmm, seems like you didn't enter a number?");
+                    System.out.println("______________________________________________________________");
+                } catch(IndexOutOfBoundsException e){
+                    System.out.println("______________________________________________________________");
+                    System.out.println("emmmm, seems like you forgot to enter something?");
+                    System.out.println("______________________________________________________________");
+                } catch(NullPointerException e){
+                    System.out.println("______________________________________________________________");
+                    System.out.println("emmm, does this task exist?");
+                    System.out.println("______________________________________________________________");
+                }
 
-            }
-            else if(line.contains("mark")){
-                String index = line.substring(line.indexOf(" ")+1);
-                int ind =  Integer.parseInt(index);
-                ind--;
-                list[ind].setDone(true);
-                System.out.println("____________________________________________________________");
-                System.out.println("Nice! I've marked this task as done:");
-                list[ind].printinfo();
-                System.out.println("____________________________________________________________");
 
-            }
-            else{
+            } else if(line.contains("mark")){
+                try{
+                    String index = line.substring(line.indexOf(" ")+1);
+                    int ind =  Integer.parseInt(index);
+                    ind--;
+                    list[ind].setDone(true);
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Nice! I've marked this task as done:");
+                    list[ind].printinfo();
+                    System.out.println("____________________________________________________________");
+                } catch(NumberFormatException e){
+                    System.out.println("______________________________________________________________");
+                    System.out.println("emmmm, seems like you didn't enter a number?");
+                    System.out.println("______________________________________________________________");
+                } catch(IndexOutOfBoundsException e) {
+                    System.out.println("______________________________________________________________");
+                    System.out.println("emmmm, seems like you forgot to enter something?");
+                    System.out.println("______________________________________________________________");
+                } catch(NullPointerException e){
+                    System.out.println("______________________________________________________________");
+                    System.out.println("emmm, does this task exist?");
+                    System.out.println("______________________________________________________________");
+                }
+            } else{
                 if(line.contains("todo")){
-                    int firstspace = line.indexOf(" ");
-                    String TaskName = line.substring(firstspace + 1);
-                    list[task_count++] = new Todo(TaskName);
-                }
-                else if(line.contains("deadline")){
-                    String[] parts = line.split("/");
-                    int firstspace = parts[0].indexOf(" ");
-                    String TaskName = parts[0].substring(firstspace + 1);
-                    list[task_count++] = new Deadline(TaskName, parts[1]);
-                }
-                else if (line.contains("event")){
-                    String[] parts = line.split("/");
-                    int firstspace = parts[0].indexOf(" ");
-                    String TaskName = parts[0].substring(firstspace + 1);
-                    list[task_count++] = new Event(TaskName, parts[1], parts[2]);
+                    try{
+                        int firstspace = line.indexOf(" ");
+                        if (firstspace == -1 || firstspace + 1 >= line.length()) {
+                            throw new IndexOutOfBoundsException();
+                        }
+                        String TaskName = line.substring(firstspace + 1);
+                        list[task_count++] = new Todo(TaskName);
+                    } catch(IndexOutOfBoundsException e){
+                        System.out.println("______________________________________________________________");
+                        System.out.println("emmmm, seems like you forgot to enter your todo name?");
+                        System.out.println("______________________________________________________________");
+                        continue;
+                    }
+
+                } else if(line.contains("deadline")){
+                    try{
+                        String[] parts = line.split("/");
+                        int firstspace = parts[0].indexOf(" ");
+                        if (firstspace == -1) {
+                            throw new StringIndexOutOfBoundsException();
+                        }
+                        String TaskName = parts[0].substring(firstspace + 1);
+                        list[task_count++] = new Deadline(TaskName, parts[1]);
+                    } catch(StringIndexOutOfBoundsException e){
+                        System.out.println("______________________________________________________________");
+                        System.out.println("emmmm, seems like you forgot to enter your deadline name?");
+                        System.out.println("______________________________________________________________");
+                        continue;
+                    } catch (ArrayIndexOutOfBoundsException e){
+                        System.out.println("______________________________________________________________");
+                        System.out.println("emmm, seemslike you forgot to enter your deadline date?");
+                        System.out.println("______________________________________________________________");
+                        continue;
+                    }
+
+                } else if (line.contains("event")){
+                    try {
+                        String[] parts = line.split("/");
+                        int firstspace = parts[0].indexOf(" ");
+                        if (firstspace == -1) {
+                            throw new StringIndexOutOfBoundsException();
+                        }
+                        String TaskName = parts[0].substring(firstspace + 1);
+                        list[task_count++] = new Event(TaskName, parts[1], parts[2]);
+                    }  catch(StringIndexOutOfBoundsException e){
+                        System.out.println("______________________________________________________________");
+                        System.out.println("emmmm, seems like you forgot to enter your event name?");
+                        System.out.println("______________________________________________________________");
+                        continue;
+                    } catch (ArrayIndexOutOfBoundsException e){
+                        System.out.println("______________________________________________________________");
+                        System.out.println("emmmm, seems like you forgot to enter your event time?");
+                        System.out.println("______________________________________________________________");
+                        continue;
+                    }
+                } else{
+                    System.out.println("______________________________________________________________");
+                    System.out.println("sorry, gordon is too dumb to understand you command :((");
+                    System.out.println("______________________________________________________________");
+                    continue;
                 }
                 System.out.println("____________________________________________________________\n" +
                         "well! ive added: ");

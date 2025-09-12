@@ -11,4 +11,9 @@ public class Todo extends Task{
         super.printinfo();
         System.out.println();
     }
+
+    @Override
+    public String toString(){
+        return ("T| " + isDone() +" | "+ getName());
+    }
 }

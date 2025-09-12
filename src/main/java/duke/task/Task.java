@@ -29,4 +29,7 @@ public class Task {
         }
         System.out.print("] " + this.name);
     }
+    public String toString(){
+        return this.name;
+    }
 }

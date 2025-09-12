@@ -21,4 +21,9 @@ public class Event extends Task{
         super.printinfo();
         System.out.println("(from: " + this.from + "to: " + this.to + ")");
     }
+    @Override
+    public String toString(){
+        return ("E| " + isDone() + " | " + getName() + " | " + from + " | " + to);
+
+    }
 }

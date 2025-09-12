@@ -5,9 +5,58 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
+
+
 public class Duke {
+    private static void checkAndWrite(Task[] list, int taskCount) {
+        String folder_path = "./data/";
+        File folder = new File(folder_path);
+        if (!folder.exists()){
+            if (folder.mkdirs()){
+                System.out.println("____________________________________________________________");
+                System.out.println("new Folder created");
+                System.out.println("____________________________________________________________");
+            }else{
+                System.out.println("____________________________________________________________");
+                System.out.println("Failed to create new Folder");
+                System.out.println("____________________________________________________________");
+            }
+        } else{
+            System.out.println("____________________________________________________________");
+            System.out.println("Folder exists! let's modify it now!");
+            System.out.println("____________________________________________________________");
+        }
+
+        try {
+            FileWriter fw = new FileWriter("./data/duke.txt");
+            String txtToAdd = "";
+            int count = 0;
+            for (Task task : list) {
+                String new_line = task.toString();
+                txtToAdd += new_line + "\n";
+                count++;
+                if (count == taskCount) {
+                    break;
+                }
+            }
+            fw.write(txtToAdd);
+            System.out.println("____________________________________________________________");
+            System.out.println("txt file has been updated");
+            System.out.println("____________________________________________________________");
+            fw.close();
+        } catch (IOException e){
+            System.out.println("Failed to write to file");
+        }
+    }
+
     public static void main(String[] args) {
         Task[] list = new Task[100];
         int task_count = 0;
@@ -50,6 +99,7 @@ public class Duke {
                     int ind =  Integer.parseInt(index);
                     ind--;
                     list[ind].setDone(false);
+                    checkAndWrite(list, task_count);
                     System.out.println("____________________________________________________________");
                     System.out.println("OK, I've marked this task as not done yet:");
                     list[ind].printinfo();
@@ -75,6 +125,7 @@ public class Duke {
                     int ind =  Integer.parseInt(index);
                     ind--;
                     list[ind].setDone(true);
+                    checkAndWrite(list, task_count);
                     System.out.println("____________________________________________________________");
                     System.out.println("Nice! I've marked this task as done:");
                     list[ind].printinfo();
@@ -101,6 +152,7 @@ public class Duke {
                         }
                         String TaskName = line.substring(firstspace + 1);
                         list[task_count++] = new Todo(TaskName);
+                        checkAndWrite(list, task_count);
                     } catch(IndexOutOfBoundsException e){
                         System.out.println("______________________________________________________________");
                         System.out.println("emmmm, seems like you forgot to enter your todo name?");
@@ -117,6 +169,7 @@ public class Duke {
                         }
                         String TaskName = parts[0].substring(firstspace + 1);
                         list[task_count++] = new Deadline(TaskName, parts[1]);
+                        checkAndWrite(list, task_count);
                     } catch(StringIndexOutOfBoundsException e){
                         System.out.println("______________________________________________________________");
                         System.out.println("emmmm, seems like you forgot to enter your deadline name?");
@@ -138,6 +191,7 @@ public class Duke {
                         }
                         String TaskName = parts[0].substring(firstspace + 1);
                         list[task_count++] = new Event(TaskName, parts[1], parts[2]);
+                        checkAndWrite(list, task_count);
                     }  catch(StringIndexOutOfBoundsException e){
                         System.out.println("______________________________________________________________");
                         System.out.println("emmmm, seems like you forgot to enter your event name?");
@@ -158,8 +212,8 @@ public class Duke {
                 System.out.println("____________________________________________________________\n" +
                         "well! ive added: ");
                 list[task_count-1].printinfo();
-                System.out.println("\n"+
-                        "____________________________________________________________\n");
+                System.out.println(
+                        "____________________________________________________________");
 
             }
         }

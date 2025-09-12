@@ -1,0 +1,3 @@
+T| false | stay happy
+D| true | hw  | tue
+E| false | stay  | mon  | sun

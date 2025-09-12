@@ -16,4 +16,8 @@ public class Deadline extends Task{
         super.printinfo();
         System.out.println("by: " + this.by);
     }
+    @Override
+    public String toString(){
+        return ("D| " + isDone()+ " | " + getName() + " | " + by);
+    }
 }

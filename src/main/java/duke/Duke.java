@@ -59,7 +59,7 @@ public class Duke {
             if (folder.mkdirs()){
                 System.out.println("____________________________________________________________");
                 System.out.println("new Folder created");
-                System.out.println("____________________________________________________________");
+
             }else{
                 System.out.println("____________________________________________________________");
                 System.out.println("Failed to create new Folder");
@@ -68,7 +68,6 @@ public class Duke {
         } else{
             System.out.println("____________________________________________________________");
             System.out.println("Folder exists! let's modify it now!");
-            System.out.println("____________________________________________________________");
         }
 
         try {
@@ -80,12 +79,13 @@ public class Duke {
                 txtToAdd += new_line + "\n";
             }
             fw.write(txtToAdd);
-            System.out.println("____________________________________________________________");
+
             System.out.println("txt file has been updated");
             System.out.println("____________________________________________________________");
             fw.close();
         } catch (IOException e) {
             System.out.println("Failed to write to file");
+            System.out.println("____________________________________________________________");
         }
     }
 
@@ -281,8 +281,6 @@ public class Duke {
                 System.out.print(
                         "____________________________________________________________\n");
 
-                System.out.println(
-                        "____________________________________________________________");
 
             }
         }

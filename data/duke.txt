@@ -1,3 +1,2 @@
-T| false | stay happy
-D| true | hw  | tue
-E| false | stay  | mon  | sun
+D| false |  | tue
+D| false | mini  | sun

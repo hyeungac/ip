@@ -14,7 +14,7 @@ public class Deadline extends Task{
     public void printinfo() {
         System.out.print("[D]");
         super.printinfo();
-        System.out.println("by: " + this.by);
+        System.out.println(" by: " + this.by);
     }
     @Override
     public String toString(){

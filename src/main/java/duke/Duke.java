@@ -48,7 +48,7 @@ public class Duke {
         if (list.isEmpty()) {
             System.out.println("oops, is there anything in the list?");
         } else {
-            list.getLast().printinfo();
+            list.get(list.size() - 1).printinfo();
         }
     }
 
@@ -103,6 +103,49 @@ public class Duke {
                 " What can I do for you?\n" +
                 "____________________________________________________________\n");
 
+        String folder_path = "./data/";
+        File folder = new File(folder_path);
+        if (!folder.exists()){
+            if (folder.mkdirs()){
+                System.out.println("____________________________________________________________");
+                System.out.println("new Folder created");
+
+            }else{
+                System.out.println("____________________________________________________________");
+                System.out.println("Failed to create new Folder");
+                System.out.println("____________________________________________________________");
+            }
+        } else{
+            System.out.println("____________________________________________________________");
+            System.out.println("Folder exists! let's modify it now!");
+        }
+
+        try {
+            File file = new File("./data/duke.txt");
+            Scanner s = new Scanner(file);
+            int index = 0;
+            while (s.hasNextLine()) {
+                String line = s.nextLine();
+                String[] parts = line.split("\\|");
+                if (line.charAt(0) == 'T'){
+                    addTask(new Todo(parts[2]));
+                }
+                else if (line.charAt(0) == 'D'){
+                    addTask(new Deadline(parts[2], parts[3]));
+                }
+                else if (line.charAt(0) == 'E'){
+                    addTask(new Event(parts[2], parts[3], parts[4]));
+                }
+                if (parts[1].equalsIgnoreCase("true")){
+                    getTask(index).setDone(true);
+                }
+                index++;
+            }
+        } catch (FileNotFoundException e){
+            System.out.println("Failed to find file");
+        }
+
+
         while (true) {
             String line;
             Scanner in = new Scanner(System.in);
@@ -120,6 +163,13 @@ public class Duke {
                 try{
                     String index = line.substring(line.indexOf(" ")+1);
                     int ind =  Integer.parseInt(index);
+                    if (ind <= 0 || ind > list.size()) {
+                        System.out.println("______________________________________________________________");
+                        System.out.println("emmm, does this task exist?");
+                        System.out.println("______________________________________________________________");
+                        continue;
+                    }
+
                     ind--;
 
                     getTask(ind).setDone(false);
@@ -136,10 +186,6 @@ public class Duke {
                     System.out.println("______________________________________________________________");
                     System.out.println("emmmm, seems like you forgot to enter something?");
                     System.out.println("______________________________________________________________");
-                } catch(NullPointerException e){
-                    System.out.println("______________________________________________________________");
-                    System.out.println("emmm, does this task exist?");
-                    System.out.println("______________________________________________________________");
                 }
 
 
@@ -147,6 +193,13 @@ public class Duke {
                 try{
                     String index = line.substring(line.indexOf(" ")+1);
                     int ind =  Integer.parseInt(index);
+                    if (ind <= 0 || ind > list.size()) {
+                        System.out.println("______________________________________________________________");
+                        System.out.println("emmm, does this task exist?");
+                        System.out.println("______________________________________________________________");
+                        continue;
+                    }
+
                     ind--;
 
                     getTask(ind).setDone(true);
@@ -165,10 +218,6 @@ public class Duke {
                 } catch(IndexOutOfBoundsException e) {
                     System.out.println("______________________________________________________________");
                     System.out.println("emmmm, seems like you forgot to enter something?");
-                    System.out.println("______________________________________________________________");
-                } catch(NullPointerException e){
-                    System.out.println("______________________________________________________________");
-                    System.out.println("emmm, does this task exist?");
                     System.out.println("______________________________________________________________");
                 }
             } else{
@@ -244,6 +293,12 @@ public class Duke {
                     try {
                         String index = line.substring(line.indexOf(" ")+1);
                         int ind =  Integer.parseInt(index);
+                        if (ind <= 0 || ind > list.size()) {
+                            System.out.println("______________________________________________________________");
+                            System.out.println("emmm, does this task exist?");
+                            System.out.println("______________________________________________________________");
+                            continue;
+                        }
                         ind--;
                         System.out.println("____________________________________________________________\n" +
                                 "well! ive deleted: ");
@@ -251,15 +306,16 @@ public class Duke {
                         System.out.print(
                                 "____________________________________________________________\n");
                         removeTask(ind);
-                        continue;
-                    } catch(StringIndexOutOfBoundsException e){
-                        System.out.println("______________________________________________________________");
-                        System.out.println("emmmm, seems like you forgot to enter something?");
-                        System.out.println("______________________________________________________________");
+                        checkAndWrite(list);
                         continue;
                     } catch(NullPointerException e){
                         System.out.println("______________________________________________________________");
                         System.out.println("emmm, does this task exist?");
+                        System.out.println("______________________________________________________________");
+                        continue;
+                    } catch(StringIndexOutOfBoundsException e){
+                        System.out.println("______________________________________________________________");
+                        System.out.println("emmmm, seems like you forgot to enter something?");
                         System.out.println("______________________________________________________________");
                         continue;
                     } catch(NumberFormatException e){

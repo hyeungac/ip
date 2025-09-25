@@ -16,10 +16,12 @@ public class Event extends Task{
     }
 
     @Override
-    public void printinfo() {
-        System.out.print("[E]");
-        super.printinfo();
-        System.out.println("(from: " + this.from + "to: " + this.to + ")");
+    public String printinfo() {
+        String output = "";
+        output += "[E]";
+        output += super.printinfo();
+        output += "(from: " + this.from + "to: " + this.to + ")";
+        return output;
     }
     @Override
     public String toString(){

@@ -1,0 +1,8 @@
+T| false |      play
+E| false |      have a nice dayyy      |      2      |      4
+E| false |      hw       |      tue       |      thur
+T| false |  play vid games
+T| false | ok
+E| false | happy  | tur  | ee
+D| false | hwww  | wed
+D| false |  | tuer

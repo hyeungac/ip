@@ -11,10 +11,12 @@ public class Deadline extends Task{
     }
 
     @Override
-    public void printinfo() {
-        System.out.print("[D]");
-        super.printinfo();
-        System.out.println(" by: " + this.by);
+    public String printinfo() {
+        String output = "";
+        output += "[D]";
+        output += (super.printinfo());
+        output += " by: " + this.by;
+        return output;
     }
     @Override
     public String toString(){

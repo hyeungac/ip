@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.Command;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -20,7 +21,42 @@ import java.util.Scanner;
 
 
 public class Duke {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showDummyLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, storage, ui);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showDummyLine();
+            }
+        }
+    }
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+    /*
     private static ArrayList<Task> list = new ArrayList<>();
 
     private static void addTask(Task task) {
@@ -91,7 +127,7 @@ public class Duke {
 
     public static void main(String[] args) {
         //Task[] list = new Task[100];
-        int task_count = 0;
+        //int task_count = 0;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -199,9 +235,7 @@ public class Duke {
                         System.out.println("______________________________________________________________");
                         continue;
                     }
-
                     ind--;
-
                     getTask(ind).setDone(true);
 
 
@@ -342,4 +376,5 @@ public class Duke {
         }
 
     }
+    */
 }

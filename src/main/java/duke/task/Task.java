@@ -19,17 +19,20 @@ public class Task {
     public void setDone(boolean done) {
         this.done = done;
     }
-    public void printinfo(){
-        System.out.print("[" );
+    public String printinfo(){
+        String output = "";
+        output += "[";
         if (this.done){
-            System.out.print("X");
+            output += "X";
         }
         else{
-            System.out.print(" ");
+            output += " ";
         }
-        System.out.print("] " + this.name);
+        output += "] " + this.name;
+        return output;
     }
     public String toString(){
         return this.name;
     }
+    public void printLastTask(){}
 }

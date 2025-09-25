@@ -12,6 +12,12 @@ import duke.command.WeirdCommand;
 import duke.command.WrongCommand;
 
 public class  Parser {
+    /**
+     * handling the command received by the UI
+     * @param UserCommand command received by the UI
+     * @return Command class instances, for execution
+     * @throws NumberFormatException handle when the input can't be converted into number
+     */
     public static Command parse(String UserCommand){
         if  (UserCommand.equals("bye")){
             return new ByeCommand();
@@ -37,10 +43,14 @@ public class  Parser {
                 return new WrongCommand("input is not a number");
             }
         } else if (UserCommand.contains("delete")){
-            String index = UserCommand.substring(UserCommand.indexOf(" ") + 1);
-            int ind = Integer.parseInt(index);
-            ind--;
-            return new DeleteCommand(ind);
+            try{
+                String index = UserCommand.substring(UserCommand.indexOf(" ") + 1);
+                int ind = Integer.parseInt(index);
+                ind--;
+                return new DeleteCommand(ind);
+            } catch (NumberFormatException e){
+                return new WrongCommand("input is not a number");
+            }
         } else if (UserCommand.contains("todo") || UserCommand.contains("event") || UserCommand.contains("deadline")){
             return new AddToCommand(UserCommand);
         } else if (UserCommand.contains("find")){

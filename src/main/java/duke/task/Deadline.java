@@ -10,6 +10,10 @@ public class Deadline extends Task{
         return by;
     }
 
+    /**
+     * return the information in a specified format
+     * @return String - output, which is the final text message
+     */
     @Override
     public String printinfo() {
         String output = "";

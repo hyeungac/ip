@@ -20,6 +20,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loading the task list from the given file path
+     * @return tasks, a list of tasks under type TaskList
+     * @throws DukeException when encountering errors when loading the file
+     */
+
     public TaskList load() throws DukeException{
         TaskList tasks = new TaskList();
         File file = new File(filePath);
@@ -49,6 +55,12 @@ public class Storage {
         }
         return tasks;
     }
+    /**
+     * Save the task list into the given file path
+     * @param tasks a list of tasks under type TaskList
+     * @throws DukeException when there are errors when handling the input and output
+     */
+
 
     public void SaveTasks(TaskList tasks) throws DukeException{
         try (FileWriter fw = new FileWriter(filePath)){

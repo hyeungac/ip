@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException;
+
 public class Task {
     private String name;
     private boolean done;
@@ -19,6 +21,10 @@ public class Task {
     public void setDone(boolean done) {
         this.done = done;
     }
+    /**
+     * return the information in a specified format
+     * @return String - output, which is the final text message
+     */
     public String printinfo(){
         String output = "";
         output += "[";

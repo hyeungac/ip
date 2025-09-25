@@ -8,11 +8,21 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
+
+
 public class AddToCommand extends Command {
     private String UserCommand;
     public AddToCommand(String UserCommand) {
         this.UserCommand = UserCommand;
     }
+    /**
+     * Add new tasks into the task list
+     *
+     * @param tasks which is a list of tasks under type TaskList
+     * @param storage which is the instance used for reading and writing information into the given file path
+     * @param ui which outputs information to the user to show message
+     * @throws DukeException when the there are errors in the file
+     */
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         int firstspace;

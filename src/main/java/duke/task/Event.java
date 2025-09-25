@@ -20,12 +20,12 @@ public class Event extends Task{
         String output = "";
         output += "[E]";
         output += super.printinfo();
-        output += "(from: " + this.from + "to: " + this.to + ")";
+        output += "(from: " + this.from + " to: " + this.to + ")";
         return output;
     }
     @Override
     public String toString(){
-        return ("E| " + isDone() + " | " + getName() + " | " + from + " | " + to);
+        return ("E|" + isDone() + "|" + getName() + "|" + from + "|" + to);
 
     }
 }

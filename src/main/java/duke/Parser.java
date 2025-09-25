@@ -46,8 +46,7 @@ public class  Parser {
         } else if (UserCommand.contains("find")){
             String entry = UserCommand.substring(UserCommand.indexOf(" ") + 1);
             return new FindCommand(entry);
-        }
-        else {
+        } else {
             return new WeirdCommand();
         }
     }

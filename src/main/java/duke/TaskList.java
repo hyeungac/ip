@@ -51,9 +51,11 @@ public class TaskList {
         int index = 1;
         for (Task task : list) {
             if (task.getName().contains(entry)) {
+                if (index != 1) {
+                    result += "\n";
+                }
                 result += index + ". ";
                 result += task.printinfo();
-                result += "\n";
                 index++;
             }
         }

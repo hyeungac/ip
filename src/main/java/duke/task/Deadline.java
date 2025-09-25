@@ -20,6 +20,6 @@ public class Deadline extends Task{
     }
     @Override
     public String toString(){
-        return ("D| " + isDone()+ " | " + getName() + " | " + by);
+        return ("D|" + isDone()+ "|" + getName() + "|" + by);
     }
 }

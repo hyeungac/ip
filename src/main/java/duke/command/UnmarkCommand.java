@@ -22,7 +22,7 @@ public class UnmarkCommand extends Command{
         }
         tasks.getTask(index).setDone(false);
         storage.SaveTasks(tasks);
-        ui.showMessage("Nice! I've marked this task as done:");
+        ui.showMessage("Nice! I've marked this task as undone:");
         System.out.println(tasks.getTask(index).printinfo());
     }
 }

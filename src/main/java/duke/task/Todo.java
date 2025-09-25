@@ -15,6 +15,6 @@ public class Todo extends Task{
 
     @Override
     public String toString(){
-        return ("T| " + isDone() +" | "+ getName());
+        return ("T|" + isDone() +"|"+ getName());
     }
 }

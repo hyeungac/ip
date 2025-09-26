@@ -26,6 +26,7 @@ public class FindCommand extends Command {
             ui.showError("uh oh... cant find such task: " + entry);
             return;
         }
+        ui.showMessage("well, ive found these for you:");
         ui.showMessage(output);
     }
 }

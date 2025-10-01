@@ -61,15 +61,20 @@ public class Storage {
      * @throws DukeException when there are errors when handling the input and output
      */
 
-
     public void SaveTasks(TaskList tasks) throws DukeException{
-        try (FileWriter fw = new FileWriter(filePath)){
-            String txtToAdd = "";
-            for (int i =0; i < tasks.getSize(); i++) {
-                String new_line = tasks.getTask(i).toString();
-                txtToAdd += new_line + "\n";
+        try {
+            File file = new File(filePath);
+            // Create parent directories if they don't exist
+            file.getParentFile().mkdirs();
+
+            try (FileWriter fw = new FileWriter(filePath)) {
+                String txtToAdd = "";
+                for (int i = 0; i < tasks.getSize(); i++) {
+                    String new_line = tasks.getTask(i).toString();
+                    txtToAdd += new_line + "\n";
+                }
+                fw.write(txtToAdd);
             }
-            fw.write(txtToAdd);
         } catch (IOException e){
             throw new DukeException("Error saving file.");
         }

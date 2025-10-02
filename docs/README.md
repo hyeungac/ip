@@ -1,6 +1,6 @@
 # Gordon_Duke User Guide
 
-![Image at the Beginning](docs/images/SS-opening.png)
+![Image at the Beginning](images/SS-opening.png)
 
 // Gordon_Duke is a personal task manager chatbot that helps you keep track of your todos, deadlines, and events.
 You can use Duke to add, list out, mark, unmark, find and delete tasks, all from the command line.

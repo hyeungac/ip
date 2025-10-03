@@ -5,7 +5,6 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-import java.io.IOException;
 
 public class UnmarkCommand extends Command{
     int  index;
